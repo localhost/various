@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ex:set ts=2 et:
+
+ Author: Alex Brem <alex@freQvibez.net>
+ Copyright (C) 2009 Alex Brem <alex@freQvibez.net>
+
+ This library is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+
+-->
+<language id="tass6502" _name="6502 assembly (64tass)" version="2.0" _section="Sources">
+
+  <metadata>
+    <property name="mimetypes">text/x-64tass;application/x-64tass</property>
+    <property name="globs">*.tas</property>
+    <property name="line-comment-start">;</property>
+  </metadata>
+
+  <styles>
+    <style id="comment"              _name="Comment"               map-to="def:comment"/>
+    <style id="opcode"               _name="Opcode"                map-to="def:keyword"/>
+    <style id="illegal-opcode"       _name="Illegal Opcode"        map-to="def:special-constant"/>
+    <style id="operator"             _name="Operator"              map-to="def:keyword"/>
+    <style id="register"             _name="Register"              map-to="def:keyword"/>
+    <style id="definition"           _name="Definition"            map-to="def:type"/>
+    <style id="string"               _name="String"                map-to="def:string"/>
+    <style id="decimal"              _name="Decimal number"        map-to="def:decimal"/>
+    <style id="base-n-integer"       _name="Base-N number"         map-to="def:base-n-integer"/>
+    <style id="numeric-literal"      _name="Numeric literal"       map-to="def:base-n-integer"/>
+    <style id="string"               _name="String"                map-to="def:string"/>
+    <style id="label"                _name="Label"                 map-to="def:identifier"/>
+    <style id="preprocessor"         _name="Preprocessor"          map-to="def:preprocessor"/>
+    <style id="error"                _name="Error"                 map-to="def:error"/>
+  </styles>
+
+  <definitions>
+
+    <context id="tass6502">
+      <include>
+        <context ref="comment"/>
+        <context ref="multiline-comment"/>
+        <context ref="opcode"/>
+        <context ref="illegal-opcode"/>
+        <context ref="operator"/>
+        <context ref="register"/>
+        <context ref="definition"/>
+        <context ref="double-quoted-string"/>
+        <context ref="decimal"/>
+        <context ref="hex"/>
+        <context ref="octal"/>
+        <context ref="binary"/>
+        <context ref="preprocessor-include"/>
+        <context ref="preprocessor-macro"/>
+        <context ref="preprocessor-loop"/>
+        <context ref="preprocessor-cond"/>
+        <!--><context ref="error"/>-->
+      </include>
+    </context>
+
+    <context id="error" style-ref="error" extend-parent="false">
+      <match>\S</match>
+    </context>
+
+    <context id="comment" style-ref="comment" end-at-line-end="true">
+      <start>;</start>
+    </context>
+
+    <context id="multiline-comment" style-ref="comment">
+      <start>.comment</start>
+      <end>.endc</end>
+      <include>
+        <context ref="def:escape"/>
+        <context ref="def:in-comment"/>
+      </include>
+    </context>
+
+    <context id="definition" style-ref="definition">
+      <match>\.(byte|word|text|offs)</match>
+    </context>
+
+    <context id="double-quoted-string">
+      <include>
+        <context style-ref="string">
+          <start>"</start><end>"</end>
+          <include>
+            <context ref="def:escape"/>
+          </include>
+        </context>
+      </include>
+    </context>
+
+    <context id="decimal" style-ref="decimal">
+      <match>(?&lt;![\w\.])#?([1-9](_?[0-9])*|0)(?![\w\.])</match>
+    </context>
+
+    <context id="hex" style-ref="base-n-integer">
+      <match>(?&lt;![\w\.])(\#?\$|0[xX])[0-9A-Fa-f](_?[0-9A-Fa-f])*(?![\w\.])</match>
+    </context>
+
+    <context id="octal" style-ref="base-n-integer">
+      <match>(?&lt;![\w\.])%?0[0-7](_?[0-7])*(?![\w\.])</match>
+    </context>
+
+    <context id="binary" style-ref="base-n-integer">
+      <match>(?&lt;![\w\.])0[bB][01](_?[01])*(?![\w\.])</match>
+    </context>
+
+    <define-regex id="operator" extended="true">
+      \+ | \- | \! |
+      &gt;&gt; | &lt;&lt; |
+      &amp; |
+      \| | \^ |
+      \* | \/ | \/\/ |
+      \+ | \- |
+      \= | \!\= | &gt; | &lt; | &gt;\= | &lt;\= |
+      \#&lt; | \#&gt; |
+      \( | \)
+    </define-regex>
+
+    <context id="operator" style-ref="operator"><!-- see `man perlop` -->
+      <match>\%{operator}</match>
+    </context>
+
+    <context id="register" style-ref="register">
+      <match>(,(x|y)(?![\w\.])| a(?![\w\.]))</match>
+    </context>
+
+    <context id="opcode" style-ref="opcode">
+      <keyword>adc</keyword>
+      <keyword>and</keyword>
+      <keyword>asl</keyword>
+      <keyword>bcc</keyword>
+      <keyword>bcs</keyword>
+      <keyword>beq</keyword>
+      <keyword>bit</keyword>
+      <keyword>bmi</keyword>
+      <keyword>bne</keyword>
+      <keyword>bpl</keyword>
+      <keyword>brk</keyword>
+      <keyword>bvc</keyword>
+      <keyword>bvs</keyword>
+      <keyword>clc</keyword>
+      <keyword>cld</keyword>
+      <keyword>cli</keyword>
+      <keyword>clv</keyword>
+      <keyword>cmp</keyword>
+      <keyword>cpx</keyword>
+      <keyword>cpy</keyword>
+      <keyword>dec</keyword>
+      <keyword>dex</keyword>
+      <keyword>dey</keyword>
+      <keyword>eor</keyword>
+      <keyword>inc</keyword>
+      <keyword>inx</keyword>
+      <keyword>iny</keyword>
+      <keyword>jmp</keyword>
+      <keyword>jsr</keyword>
+      <keyword>lda</keyword>
+      <keyword>ldx</keyword>
+      <keyword>ldy</keyword>
+      <keyword>lsr</keyword>
+      <keyword>nop</keyword>
+      <keyword>ora</keyword>
+      <keyword>pha</keyword>
+      <keyword>php</keyword>
+      <keyword>pla</keyword>
+      <keyword>plp</keyword>
+      <keyword>rol</keyword>
+      <keyword>ror</keyword>
+      <keyword>rti</keyword>
+      <keyword>rts</keyword>
+      <keyword>sbc</keyword>
+      <keyword>sec</keyword>
+      <keyword>sed</keyword>
+      <keyword>sei</keyword>
+      <keyword>sta</keyword>
+      <keyword>stx</keyword>
+      <keyword>sty</keyword>
+      <keyword>tax</keyword>
+      <keyword>tay</keyword>
+      <keyword>tsx</keyword>
+      <keyword>txa</keyword>
+      <keyword>txs</keyword>
+      <keyword>tya</keyword>
+    </context>
+
+    <!-- illegal opcodes, see http://www.oxyron.de/html/opcodes02.html -->
+    <context id="illegal-opcode" style-ref="illegal-opcode">
+      <keyword>ahx</keyword>
+      <keyword>alr</keyword>
+      <keyword>anc</keyword>
+      <keyword>arr</keyword>
+      <keyword>axs</keyword>
+      <keyword>dcp</keyword>
+      <keyword>isc</keyword>
+      <keyword>las</keyword>
+      <keyword>lax</keyword>
+      <keyword>rla</keyword>
+      <keyword>rra</keyword>
+      <keyword>sax</keyword>
+      <keyword>shx</keyword>
+      <keyword>shy</keyword>
+      <keyword>slo</keyword>
+      <keyword>sre</keyword>
+      <keyword>tas</keyword>
+      <keyword>xaa</keyword>
+    </context>
+
+    <context id="preprocessor-include" style-ref="preprocessor">
+      <match>\.(include|binary)</match>
+    </context>
+
+    <context id="preprocessor-macro" style-ref="preprocessor">
+      <match>\.(macro|endm)</match>
+    </context>
+
+    <context id="preprocessor-loop" style-ref="preprocessor">
+      <match>\.(for|rept|next)</match>
+    </context>
+
+    <context id="preprocessor-cond" style-ref="preprocessor">
+      <match>\.(if|else|fi)</match>
+    </context>
+
+  </definitions>
+
+</language>
