@@ -28,3 +28,8 @@ spell-correct.io, spell-correct.go
 ----------------------------------
 
 My conversion of [Peter Norvig's Spelling Corrector](http://www.norvig.com/spell-correct.html) to the [Io language](http://iolanguage.com/) and to [Go](http://golang.org/).
+
+quine.go
+--------
+
+A 134 bytes quine in Go.
