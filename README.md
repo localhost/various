@@ -34,13 +34,13 @@ quine.go
 
 A 134 bytes quine in Go.
 
-wp.m, wp.swift
---------------
+wp.m, wp.swift, wp.io
+---------------------
 
-Two implementations for the problem described [here](http://ptrace.fefe.de/wp/README.txt).
+My implementations for the problem described [here](http://ptrace.fefe.de/wp/README.txt).
 
 > The idea is to measure in each language how well it performs this basic
 > problem, how much memory it takes, and how elegant the solution looks.
 
-So far my implementation in Objective-C is over 14 times faster than the one in [Swift](https://developer.apple.com/swift/).
+So far the implementation in Objective-C is over 14 times faster than the one in [Swift](https://developer.apple.com/swift/).
 
