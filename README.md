@@ -34,8 +34,8 @@ quine.go
 
 A 134 bytes quine in Go.
 
-wp.m, wp.swift, wp.io
----------------------
+wp.m, wp.swift, wp.io, wp.rb, wp.cr
+-----------------------------------
 
 My implementations for the problem described [here](http://ptrace.fefe.de/wp/README.txt).
 
@@ -44,3 +44,4 @@ My implementations for the problem described [here](http://ptrace.fefe.de/wp/REA
 
 So far the implementation in Objective-C is over 14 times faster than the one in [Swift](https://developer.apple.com/swift/).
 
+The Crystal implementation seems to be twice as fast as the Ruby one.
