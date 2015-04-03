@@ -37,11 +37,11 @@ A 134 bytes quine in Go.
 wp.m, wp.swift, wp.io, wp.rb, wp.cr
 -----------------------------------
 
-My implementations for the problem described [here](http://ptrace.fefe.de/wp/README.txt).
+My implementations of the problem described [here](http://ptrace.fefe.de/wp/README.txt).
 
 > The idea is to measure in each language how well it performs this basic
 > problem, how much memory it takes, and how elegant the solution looks.
 
-So far the implementation in Objective-C is over 14 times faster than the one in [Swift](https://developer.apple.com/swift/).
+So far the implementation in Objective-C is over 14 times faster than the [Swift](https://developer.apple.com/swift/) one.
 
-The Crystal implementation seems to be twice as fast as the Ruby one.
+The [Crystal](http://crystal-lang.org/) implementation seems to be twice as fast as the Ruby one.
