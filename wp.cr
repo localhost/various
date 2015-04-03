@@ -4,7 +4,7 @@ words = Hash(String, Int32).new(0)
 
 STDIN.each_line do |line|
   line.split.each do |word|
-  	words[word] += 1
+    words[word] += 1
   end
 end
 

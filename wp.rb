@@ -4,8 +4,8 @@ words = {}
 
 ARGF.each_line do |line|
   line.split.each do |word|
-  	words[word] ||= 0
-  	words[word] += 1
+    words[word] ||= 0
+    words[word] += 1
   end
 end
 
