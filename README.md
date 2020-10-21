@@ -45,3 +45,10 @@ My implementations of the problem described [here](http://ptrace.fefe.de/wp/READ
 So far the implementation in Objective-C is over 14 times faster than the [Swift](https://developer.apple.com/swift/) one.
 
 The [Crystal](http://crystal-lang.org/) implementation seems to be twice as fast as the Ruby one.
+
+alpine_chroot_install.sh
+------------------------
+
+Simple script to install [Alpine Linux](https://www.alpinelinux.org/) into a chroot environment.
+
+Just set up your paritions, customize the `partitions` variable, and then run the script.
