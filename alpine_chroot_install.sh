@@ -103,7 +103,7 @@ iface lo inet loopback
 
 auto eth0
 iface eth0 inet dhcp
-  hostname haiwo
+  hostname ${hostname}
 EOF
 chroot ${chroot_dir} /sbin/rc-update add networking
 
