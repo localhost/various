@@ -34,8 +34,8 @@ quine.go
 
 A 134 bytes quine in Go.
 
-wp.m, wp.swift, wp.io, wp.rb, wp.cr, wp.nim
--------------------------------------------
+wp.m, wp.swift, wp.io, wp.rb, wp.cr, wp.nim, wp.lua
+---------------------------------------------------
 
 My implementations of the problem described [here](http://ptrace.fefe.de/wp/README.txt).
 
